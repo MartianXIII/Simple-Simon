@@ -1,0 +1,359 @@
+<!doctype html>
+<html>
+<head> 
+    <title>Music boxes</title>
+    <style type="text/css">
+    	body {
+    background-color: #f2f2f2;   
+}
+
+/*This is the style for our boxs' container. With it we can position and center the boxes in the browser.*/
+
+#instrument {
+    height: 116px;
+    width: 812px;
+    padding-right: 10px;
+    padding-top: 50px;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+/*This is the style that give our music boxes shape*/
+
+.box {
+    width: 200px;
+    height: 20px;
+    margin-left: 350px;
+    margin-top: 1px;
+    float:center;
+}
+
+/*These are the styles that individually color our boxes and also determine the hover and active states*/
+
+#c:hover {
+    background-color:#661920;
+    cursor: pointer;
+}
+
+#c:active {
+    background-color:#db1d2d;   
+}
+
+#c {
+    background-color: #3e181b;
+    border: 3px solid #db1d2d;
+}
+
+
+#d:hover {
+    background-color:#6e2819;
+    cursor: pointer;
+}
+
+#d:active {
+    background-color:#f0421c;   
+}
+
+#d {
+    background-color: #422018;
+    border: 3px solid #f0421c;
+}
+
+
+#e:hover {
+    background-color:#735b20;
+    cursor: pointer;
+}
+
+#e:active {
+    background-color:#fec02d;   
+}
+
+#e {
+    background-color: #45391b;
+    border: 3px solid #fec02d;
+}
+
+
+#f:hover {
+    background-color:#1b613b;
+    cursor: pointer;
+}
+
+#f:active {
+    background-color:#20d071;   
+}
+
+#f {
+    background-color: #193c29;
+    border: 3px solid #20d071;
+}
+
+
+#g:hover {
+    background-color:#184d65;
+    cursor: pointer;
+}
+
+#g:active {
+    background-color:#1a9ddb;   
+}
+
+#g {
+    background-color: #18323e;
+    border: 3px solid #1a9ddb;
+}
+
+
+#a:hover {
+    background-color:#4e2753;
+    cursor: pointer;
+}
+
+#a:active {
+    background-color:#a13fad;   
+}
+
+#a {
+    background-color: #331f35;
+              border: 3px solid #a13fad;
+} 
+
+
+#b:hover {
+    background-color:#6f3a62;
+    cursor: pointer;
+}
+
+#b:active {
+    background-color:#f26fd4;   
+}
+
+#b {
+    background-color: #43293d;
+    border: 3px solid #f26fd4;
+}
+.active {
+  opacity: 0.4;
+  
+}   
+    </style>
+</head>
+<body> 
+	 <audio id="picked">
+    </audio>
+    <audio id="wrong">
+    </audio>
+    <audio id="cAudio">
+        <source src="/music_notes/c_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/c_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/c_note.wav" type="audio/wav"></source>   
+    </audio>
+    <audio id="dAudio">
+        <source src="/music_notes/d_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/d_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/d_note.wav" type="audio/wav"></source>   
+    </audio> 
+    <audio id="eAudio">
+        <source src="/music_notes/e_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/e_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/e_note.wav" type="audio/wav"></source>   
+    </audio>
+    <audio id="fAudio">
+        <source src="/music_notes/f_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/f_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/f_note.wav" type="audio/wav"></source>   
+    </audio>
+    <audio id="gAudio">
+        <source src="/music_notes/g_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/g_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/g_note.wav" type="audio/wav"></source>   
+    </audio>
+    <audio id="aAudio">
+        <source src="/music_notes/a_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/a_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/a_note.wav" type="audio/wav"></source>   
+    </audio>
+    <audio id="bAudio">
+        <source src="/music_notes/b_note.mp3" type="audio/mpeg"></source>
+        <source src="/music_notes/b_note.ogg" type="audio/ogg"></source>
+        <source src="/music_notes/b_note.wav" type="audio/wav"></source>   
+    </audio>
+    <div id="score">
+        <p><span id="round"></span></p>
+        <h2 class="start" align="center">Apple Says</h2>
+   </div>
+   <div id="game">
+    <div id= "instrument">   
+        <div id= "e" id ="yellow" class="box" data-number="2"></div>
+        <div id= "f" id ="green" class="box" data-number="3"></div>
+        <div id= "c" id ="red" class="box" data-number="0"></div>        
+        <div id= "d" class="box" data-number="1"></div>
+        <div id= "a" class="box" data-number="5"></div>
+        <div id= "b" class="box" data-number="6"></div>
+        <div id= "g" id="blue" class="box" data-number="4"></div>
+    </div>
+   </div> 
+    <script type="text/javascript" src="/js/jquery-1.11.3.js">
+    </script>
+    <script>
+
+$(document).ready(function() {
+
+	$(document).ready(function(){
+var gameColor = $('#game').children();
+var simonArray = [];
+var i = 0;
+var player = 0;
+var timer = 10;
+var round =1;
+var interval;
+var intervalID;
+var picked = document.getElementById('picked');
+var wrong = document.getElementById('wrong');
+
+
+var pickColorSimon = function() {
+        // resets i to 0 so the index of simon will start at the beginning
+        i = 0;
+        // resets player to 0 so the index of players choices will start at the beginning
+        player = 0;
+        // function that will allow computer to make random choice of div
+        var choice = Math.floor(Math.random()*(gameColor.length));
+        // pushes the computer's random choice onto the simon array
+        simonArray.push(choice);
+        // sets the interval to cycle through the array with the showColorSimon function
+        intervalID = setInterval(function(){
+ 
+            if(i < simonArray.length) {
+                console.log(simonArray.length);
+                $(gameColor[simonArray[i]])
+                .animate({opacity: "1"}, 500)
+                .animate({opacity: ".30"}, 500);
+                i++;
+            } else {
+        // if i is not less than the length of the simon array, it clears the interval
+            clearInterval(intervalID);
+            }
+        },1000)};
+
+function updateTimer() {
+            // if player does not guess before time runs out
+            if (timer == 0) {
+                alert("Game Over. Simon Wins.");
+            // makes timer count down
+            } else if (timer > 0) {
+                $(".start").html(timer);
+            };
+            // subtracts 1 each second based on interval
+            timer--;
+        };
+
+
+$(".start").click(function () {
+    simonArray = [];
+    $("h2").html("Watch Simon - Repeat Simon");
+    pickColorSimon();
+
+//    Game Timer if Want
+//    interval = setInterval(updateTimer, 1500);
+    
+    // adding event listener to the box that is clicked on by user
+    $('.box').on('mousedown',(function () {
+        picked.currentTime = 0;
+        picked.play();
+        $(this).animate({opacity: "1"}, 200)
+            .animate({opacity: ".30"}, 200);
+        if ( $(this).data("number") == simonArray[player]) {
+            picked.currentTime = 0;
+            picked.play();
+            if (player + 1 == simonArray.length) {
+                round++;
+                $("#round").html("Current Round: "+ round);
+                pickColorSimon();
+                timer = 10;
+            } else {
+                player++;
+            }
+        } else {
+            wrong.currentTime = 0;
+            wrong.play();
+            $('.box').off('mousedown');
+            $("#round").html("You made it to level " + round);
+            clearInterval(intervalID);
+            clearInterval(interval);
+            round = 1;
+            $('.start').html("Game Over - Click Start to Try Again");
+
+        }
+        console.log("player array = " + $(this).data("number"));
+    }));
+});
+});
+
+
+    
+    var cNote = document.getElementById('cAudio');
+    $('#c').mousedown(function(){
+        cNote.currentTime = 0;
+        cNote.play();
+    });
+    
+    var dNote = document.getElementById('dAudio');
+    $('#d').mousedown(function(){
+    	keyPresse = "d";
+        dNote.currentTime = 0;
+        dNote.play();
+        console.log();
+    });
+    
+    // This controls the button for the e note.
+    
+    var eNote = document.getElementById('eAudio');
+    
+    $('#e').mousedown(function(){
+        eNote.currentTime = 0;
+        eNote.play();
+    });
+ 
+    // This controls the button for the f note.
+    
+    var fNote = document.getElementById('fAudio');
+    
+    $('#f').mousedown(function(){
+        fNote.currentTime = 0;
+        fNote.play();
+    });
+    
+    // This controls the button for the g note.
+    
+    var gNote = document.getElementById('gAudio');
+    
+    $('#g').mousedown(function(){
+        gNote.currentTime = 0;
+        gNote.play();
+    });
+    
+    // This controls the button for the a note.
+    
+    var aNote = document.getElementById('aAudio');
+    
+    $('#a').mousedown(function(){
+        aNote.currentTime = 0;
+        aNote.play();
+    });
+    
+    // This controls the button for the b note.
+    
+    var bNote = document.getElementById('bAudio');
+    
+    $('#b').mousedown(function(){
+        bNote.currentTime = 0;
+        bNote.play();
+    });
+    
+});
+    </script>
+</body>
+</html>
