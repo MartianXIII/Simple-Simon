@@ -189,7 +189,6 @@
 
 			$(document).ready(function(){
                 var GameOn = false;
-                var number;
 				var Note = $('#instrument').children();
 				var simonArray = [];
 				var i = 0;
@@ -295,6 +294,9 @@ $(".start").click(function () {
     }));
 
 });
+    $(document).keypress(function(e){
+        console.log(event.keycode);
+    });
 
     var cNote = document.getElementById('cAudio');
     $('#c').mousedown(function(){
@@ -303,10 +305,6 @@ $(".start").click(function () {
     });
     
     var dNote = document.getElementById('dAudio');
-    //$('.box').keypress(function(e){
-       // console.log(e.keypress)
-    //})
-
     $('#d').mousedown(function(){ 
         dNote.currentTime = 0;
         dNote.play();
